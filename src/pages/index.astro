@@ -1,17 +1,59 @@
 ---
-
+const title = "Chris Parsons";
+const startWork = new Date(2018, 7);
+const currentDate = new Date();
+const experienceInYears = Math.floor(
+  (currentDate.getTime() - startWork.getTime()) / (1000 * 60 * 60 * 24 * 365),
+);
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title + ": Home"}</title></head
+  >
+
+  <body>
+    <div
+      style={{
+        maxWidth: `600px`,
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "0.5rem",
+        }}
+      >
+        <a href="/blog">blog</a>
+        <a href="/work">work</a>
+      </div>
+      <h1>{title}</h1>
+      <p>
+        Hey there, I'm Chris, a full-stack software engineer with {
+          experienceInYears
+        }+ years of experience. Currently working at <a
+          href="https://stotles.com"
+          target="_blank"
+          rel="noopener noreferrer">Stotles</a
+        >.
+      </p>
+      <p>
+        Across my time in software engineering, I have had a large focus on the
+        public sector and public sector adjacent companies.
+      </p>
+      <p>
+        Take a look at <a href="/work">what I've been up to</a>.
+      </p>
+    </div>
+  </body>
 </html>
