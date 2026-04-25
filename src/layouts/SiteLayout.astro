@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en-gb">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Chris Parsons: {title}</title>
+  </head>
+  <body>
+    <div
+      style={{
+        maxWidth: `600px`,
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "0.5rem",
+        }}
+      >
+        <a href="/">home</a>
+        <a href="/work">work</a>
+        <a href="/blog">blog</a>
+      </nav>
+      <slot />
+    </div>
+  </body>
+</html>
