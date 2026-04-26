@@ -1,5 +1,7 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { Image } from "astro:assets";
+import profile from "../images/profile.png";
 
 const title = "Home";
 const startWork = new Date(2018, 7);
@@ -10,7 +12,28 @@ const experienceInYears = Math.floor(
 ---
 
 <SiteLayout title={title}>
-  <h1>Chris Parsons</h1>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: "1rem",
+    }}
+  >
+    <Image
+      src={profile}
+      alt="Chris Parsons"
+      style={{
+        //want to make the image circular
+        borderRadius: "50%",
+        // want the image to have a width of 3 rem, and the ratio of the image to not change
+        height: "3rem",
+        width: "3rem",
+        border: "3px solid #ccc",
+      }}
+    />
+    <h1>Chris Parsons</h1>
+  </div>
   <p>
     Hey there, I'm Chris, a full-stack software engineer with {
       experienceInYears
