@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import profile from "../images/profile.png";
 
 const title = "Home";
+const description =
+  "Portfolio site of Chris Parsons (Christopher Parsons), a software engineer working in the United Kingdom.";
 const startWork = new Date(2018, 7);
 const currentDate = new Date();
 const experienceInYears = Math.floor(
@@ -11,7 +13,7 @@ const experienceInYears = Math.floor(
 );
 ---
 
-<SiteLayout title={title}>
+<SiteLayout title={title} description={description}>
   <div
     style={{
       display: "flex",
