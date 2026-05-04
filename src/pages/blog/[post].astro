@@ -1,0 +1,28 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post: (typeof posts)[number]) => ({
+    params: { post: post.id },
+  }));
+}
+
+const { post } = Astro.params;
+if (!post) throw new Error("Missing post param");
+
+const entry = await getEntry("blog", post);
+if (!entry) return Astro.redirect("/404");
+
+const { Content } = await render(entry);
+
+const pubDate = new Date(entry.data.pubDate);
+const formattedDate = pubDate.toLocaleDateString("en-GB");
+---
+
+<SiteLayout title={entry.data.title}>
+  <h1>{entry.data.title}</h1>
+  <p>Published: {formattedDate}</p>
+  <Content />
+</SiteLayout>
