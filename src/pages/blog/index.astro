@@ -2,10 +2,7 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 const posts = await getCollection("blog");
-posts.sort(
-  (a: (typeof posts)[number], b: (typeof posts)[number]) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const title = "Blog";
 ---
@@ -14,7 +11,7 @@ const title = "Blog";
   <h1>Blog Posts</h1>
   <ul>
     {
-      posts.map((post: (typeof posts)[number]) => (
+      posts.map((post) => (
         <li>
           <a href={`/blog/${post.id}`}>{post.data.title}</a>
         </li>
