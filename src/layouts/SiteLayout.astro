@@ -5,17 +5,25 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+import { Font } from "astro:assets";
 ---
 
 <html lang="en-gb">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png+xml" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    {description && <meta name="description" content={description} />}
-    <title>Chris Parsons: {title}</title>
-  </head>
+  <style>
+    body {
+      font-family: var(--font-open-sans);
+    }
+  </style>
+
+  <Font cssVariable="--font-open-sans" />
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png+xml" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  {description && <meta name="description" content={description} />}
+  <title>Chris Parsons: {title}</title>
+
   <body>
     <div
       style={{
@@ -37,7 +45,11 @@ const { title, description } = Astro.props;
         <a href="/work">work</a>
         <a href="/blog">blog</a>
       </nav>
-      <main>
+      <main
+        style={{
+          padding: "1rem",
+        }}
+      >
         <slot />
       </main>
     </div>
