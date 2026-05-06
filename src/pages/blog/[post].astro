@@ -18,11 +18,28 @@ if (!entry) return Astro.redirect("/404");
 const { Content } = await render(entry);
 
 const pubDate = new Date(entry.data.pubDate);
-const formattedDate = pubDate.toLocaleDateString("en-GB");
+const formattedDate = pubDate.toLocaleDateString("en-GB", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  weekday: "long",
+});
 ---
+
+<style>
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .date {
+    margin-top: 0;
+    color: grey;
+    font-size: 0.9rem;
+  }
+</style>
 
 <SiteLayout title={entry.data.title}>
   <h1>{entry.data.title}</h1>
-  <p>Published: {formattedDate}</p>
+  <p class="date">{formattedDate}</p>
   <Content />
 </SiteLayout>
