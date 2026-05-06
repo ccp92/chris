@@ -16,6 +16,9 @@ import { Font } from "astro:assets";
 
   main {
     padding: 1rem;
+    padding-top: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   a {
@@ -35,8 +38,12 @@ import { Font } from "astro:assets";
 
   .nav {
     display: flex;
-    justify-content: center;
-    gap: 0.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-size: 1.5rem;
   }
 </style>
 
@@ -54,9 +61,11 @@ import { Font } from "astro:assets";
   <body>
     <div class="container">
       <nav class="nav">
-        <a href="/">home</a>
-        <a href="/work">work</a>
-        <a href="/blog">blog</a>
+        <a href="/">CHRIS PARSONS</a>
+        <div>
+          <a href="/work">work</a>
+          <a href="/blog">blog</a>
+        </div>
       </nav>
       <main>
         <slot />

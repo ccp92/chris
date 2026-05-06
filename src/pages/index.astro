@@ -1,7 +1,7 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { Image } from "astro:assets";
-import profile from "../images/profile.png";
+import profile from "../images/profile.jpg";
 
 const title = "Home";
 const description =
@@ -14,6 +14,10 @@ const experienceInYears = Math.floor(
 ---
 
 <style>
+  p {
+    font-size: 1.3rem;
+  }
+
   .container {
     display: flex;
     flex-direction: row;
@@ -21,42 +25,53 @@ const experienceInYears = Math.floor(
     gap: 1rem;
   }
 
-  .profileImage {
-    border-radius: 50%;
-    height: 3rem;
-    width: 3rem;
-    border: 3px solid #066e7e;
-  }
-  p {
-    font-size: 1.3rem;
+  .intro {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    gap: 1rem;
+
+    .intro-text {
+      flex: 2;
+    }
+
+    .profile-picture {
+      flex: 1;
+      height: 16rem;
+      width: auto;
+      object-fit: cover;
+      border-radius: 1rem;
+      margin-top: 1rem;
+    }
   }
 </style>
 
 <SiteLayout title={title} description={description}>
-  <div class="container">
+  <div class="intro">
+    <div class="intro-text">
+      <p>
+        Hey there, I'm Chris, a full-stack software engineer working in London
+        with {experienceInYears}+ years of experience. Currently working at <a
+          href="https://stotles.com"
+          target="_blank"
+          rel="noopener noreferrer">Stotles</a
+        >, helping to build a platform for companies to manage their public
+        sector procurement flows.
+      </p>
+      <p>
+        Across my time in software engineering, I have had a large focus on the
+        public sector and public sector adjacent companies.
+      </p>
+      <p>
+        Take a look at <a href="/work">what I've been up to</a>.
+      </p>
+    </div>
     <Image
       src={profile}
-      alt="Chris Parsons"
-      class="profileImage"
+      alt="Chris Parsons taking a selfie in a mirrored lift"
+      class="profile-picture"
       loading="eager"
     />
-    <h1>Chris Parsons</h1>
   </div>
-  <p>
-    Hey there, I'm Chris, a full-stack software engineer working in London with {
-      experienceInYears
-    }+ years of experience. Currently working at <a
-      href="https://stotles.com"
-      target="_blank"
-      rel="noopener noreferrer">Stotles</a
-    >, helping to build a platform for companies to manage their public sector
-    procurement flows.
-  </p>
-  <p>
-    Across my time in software engineering, I have had a large focus on the
-    public sector and public sector adjacent companies.
-  </p>
-  <p>
-    Take a look at <a href="/work">what I've been up to</a>.
-  </p>
 </SiteLayout>
