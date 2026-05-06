@@ -28,18 +28,29 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
 
 <style>
   h1 {
+    color: #1b4332;
     margin-bottom: 0;
   }
 
   .date {
     margin-top: 0;
-    color: grey;
+    color: #74c69d;
     font-size: 0.9rem;
+  }
+
+  article :global(h2) {
+    color: #2d6a4f;
+  }
+
+  article :global(p) {
+    font-size: 1.1rem;
   }
 </style>
 
 <SiteLayout title={entry.data.title}>
   <h1>{entry.data.title}</h1>
   <p class="date">{formattedDate}</p>
-  <Content />
+  <article>
+    <Content />
+  </article>
 </SiteLayout>
