@@ -28,21 +28,40 @@ const experienceInYears = Math.floor(
   .intro {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap-reverse;
     align-items: center;
     gap: 1rem;
+  }
+
+  .intro-text {
+    flex: 2;
+  }
+
+  .profile-picture {
+    flex: 1;
+    height: 16rem;
+    width: auto;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 1000px) {
+    .intro {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
 
     .intro-text {
-      flex: 2;
+      flex: none;
+      width: 100%;
     }
 
     .profile-picture {
-      flex: 1;
       height: 16rem;
       width: auto;
       object-fit: cover;
-      border-radius: 1rem;
-      margin-top: 1rem;
+      flex: none;
+      margin-top: 0;
     }
   }
 </style>
