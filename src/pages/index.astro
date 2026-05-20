@@ -2,10 +2,11 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { Image } from "astro:assets";
 import profile from "../images/profile.jpg";
+import headshot from "../images/headshot.jpeg";
 
 const title = "Home";
 const description =
-  "Portfolio site of Chris Parsons (Christopher Parsons), a software engineer working in the United Kingdom.";
+  "Portfolio site of Chris Parsons (Christopher Parsons), a fullstack software engineer working in Lodnon, in the United Kingdom.";
 const startWork = new Date(2018, 7);
 const currentDate = new Date();
 const experienceInYears = Math.floor(
@@ -15,55 +16,70 @@ const experienceInYears = Math.floor(
 
 <style>
   p {
-    font-size: 1.3rem;
+    font-size: 16px;
   }
 
-  .intro {
+  .container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 48px;
+    align-items: flex-start;
   }
 
-  .intro-text {
-    flex: 2;
-  }
+  .info {
+    display: flex;
+    gap: 24px;
+    padding-top: 48px;
 
-  .profile-picture {
-    flex: 1;
-    height: 16rem;
-    width: auto;
-    object-fit: cover;
-    border-radius: 1rem;
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    .intro {
-      flex-direction: column-reverse;
-      align-items: center;
+    h1 {
+      color: hsl(153 39% 25%);
+      font-size: 24px;
     }
 
-    .intro-text {
-      flex: none;
-      width: 100%;
+    .subtitle {
+      font-size: 16px;
+      margin-top: 0;
+      color: hsl(153 39% 65%);
+      font-weight: normal;
     }
 
-    .profile-picture {
-      flex: none;
+    .profile-icon {
+      max-height: 120px;
+      max-width: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
     }
   }
 </style>
 
 <SiteLayout title={title} description={description}>
-  <div class="intro">
+  <section class="container">
+    <header class="info">
+      <Image
+        src={headshot}
+        alt="A studio headshot of Chris Parsons, a person with short, styled brown hair and blue eyes, smiling gently at the camera. They are wearing a white, short-sleeved button-down shirt featuring a bold geometric pattern in shades of blue, pink, and lavender. The background is a clean, minimalist split of off-white on top and a soft, muted sage green on the bottom."
+        class="profile-icon"
+        loading="eager"
+      />
+      <div class="description">
+        <h1>Chris Parsons</h1>
+        <p class="subtitle">Fullstack Software Engineer</p>
+      </div>
+    </header>
+
     <div class="intro-text">
       <p>
-        Hey there, I'm Chris, a full-stack software engineer working in London
+        Hey there! I'm Chris, a full-stack software engineer working in London
         with {experienceInYears}+ years of experience. Currently working at <a
           href="https://stotles.com"
           target="_blank"
-          rel="noopener noreferrer">Stotles</a
+          rel="noopener noreferrer"
+          aria-label="External link to Stotles' homepage">Stotles</a
         >, helping to build a platform for companies to manage their public
         sector procurement flows.
       </p>
@@ -75,11 +91,5 @@ const experienceInYears = Math.floor(
         Take a look at <a href="/work">what I've been up to</a>.
       </p>
     </div>
-    <Image
-      src={profile}
-      alt="Chris Parsons taking a selfie in a mirrored lift"
-      class="profile-picture"
-      loading="eager"
-    />
-  </div>
+  </section>
 </SiteLayout>
