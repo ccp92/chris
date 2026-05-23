@@ -6,9 +6,30 @@ const description =
   "The work history of Chris Parsons (Christopher Parsons), a software engineer working in the United Kingdom.";
 ---
 
+<style>
+  h1 {
+    color: hsl(153 39% 25%);
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-top: 0;
+    color: hsl(153 39% 25%);
+    /*color: hsl(153 39% 65%);*/
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  .job {
+    padding-top: 24px;
+  }
+</style>
+
 <SiteLayout title={title} description={description}>
   <h1>Career</h1>
-  <div>
+  <section class="job">
     <h2>Stotles</h2>
     <p>Software Engineer</p>
     <p>May 2023 - Present</p>
@@ -54,8 +75,8 @@ const description =
       Key Technologies: TypeScript, NestJS, GraphQL, React, Ruby on Rails,
       PostgreSQL, Elasticsearch, AWS, S3, Terraform.
     </p>
-  </div>
-  <div>
+  </section>
+  <section class="job">
     <h2>Babylon Health</h2>
     <p>Software Engineer</p>
     <p>January 2022 - December 2022</p>
@@ -82,8 +103,8 @@ const description =
       developers to work with, ensuring a common development flow across teams
       when working with the platform.
     </p>
-  </div>
-  <div>
+  </section>
+  <section class="job">
     <h2>Made Tech</h2>
     <p>Software Engineer</p>
     <p>June 2018 - December 2021</p>
@@ -113,8 +134,8 @@ const description =
       communicate this effectively back to clients and deal with concerns and
       queries in a professional manner.
     </p>
-  </div>
-  <div>
+  </section>
+  <section class="job">
     <h2>Real Asset Management</h2>
     <p>Technical Services Consultant</p>
     <p>November 2013 - March 2018</p>
@@ -142,5 +163,5 @@ const description =
       my core role of support through appropriate time management and
       prioritisation of tasks.
     </p>
-  </div>
+  </section>
 </SiteLayout>
