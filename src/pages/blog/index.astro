@@ -4,18 +4,40 @@ import { getCollection } from "astro:content";
 const posts = await getCollection("blog");
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
+const groupedPosts = new Map<string, typeof posts>();
+for (const post of posts) {
+  const date = new Date(post.data.pubDate);
+  const monthKey = date.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+  });
+
+  if (!groupedPosts.has(monthKey)) {
+    groupedPosts.set(monthKey, []);
+  }
+
+  groupedPosts.get(monthKey)!.push(post);
+}
+
 const title = "Blog";
 ---
 
 <SiteLayout title={title}>
   <h1>Blog Posts</h1>
-  <ul>
-    {
-      posts.map((post) => (
-        <li>
-          <a href={`/blog/${post.id}`}>{post.data.title}</a>
-        </li>
-      ))
-    }
-  </ul>
+  {
+    Array.from(groupedPosts.entries()).map(([month, monthPosts]) => (
+      <section>
+        <h2>{month}</h2>
+        <ul>
+          {monthPosts.map((post) => (
+            <li>
+              {new Date(post.data.pubDate).toLocaleDateString("en-GB")}
+              {" - "}
+              <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
 </SiteLayout>
