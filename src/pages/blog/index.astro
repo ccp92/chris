@@ -22,6 +22,21 @@ for (const post of posts) {
 const title = "Blog";
 ---
 
+<style>
+  h1 {
+    color: hsl(155, 43%, 18%);
+    margin-bottom: 0;
+  }
+
+  h2 {
+    color: hsl(153, 40%, 30%);
+  }
+
+  .date {
+    color: hsl(0, 0%, 0%, 0.6);
+  }
+</style>
+
 <SiteLayout title={title}>
   <h1>Blog Posts</h1>
   {
@@ -31,8 +46,10 @@ const title = "Blog";
         <ul>
           {monthPosts.map((post) => (
             <li>
-              {new Date(post.data.pubDate).toLocaleDateString("en-GB")}
-              {" - "}
+              <span class="date">
+                {new Date(post.data.pubDate).toLocaleDateString("en-GB")}
+                {" - "}
+              </span>
               <a href={`/blog/${post.id}`}>{post.data.title}</a>
             </li>
           ))}
