@@ -47,7 +47,7 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
   }
 </style>
 
-<SiteLayout title={entry.data.title}>
+<SiteLayout title={entry.data.title} description={entry.data.description}>
   <h1>{entry.data.title}</h1>
   <p class="date">{formattedDate}</p>
   <article>

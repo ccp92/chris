@@ -55,7 +55,11 @@ import { Font } from "astro:assets";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
     <title>Chris Parsons : {title}</title>
+    <meta property="og:title" content={`Chris Parsons : ${title}`} />
   </head>
 
   <body>
