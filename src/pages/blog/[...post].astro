@@ -1,6 +1,8 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import SiteLayout from "../../layouts/SiteLayout.astro";
+import Comments from "../../components/Comments.astro";
+import fs from "fs";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -16,6 +18,14 @@ const entry = await getEntry("blog", post);
 if (!entry) return Astro.redirect("/404");
 
 const { Content } = await render(entry);
+
+let bskyPostUri: string | undefined;
+try {
+  const syncState = JSON.parse(fs.readFileSync(".atproto-sync.json", "utf-8"));
+  bskyPostUri = syncState.posts[post]?.bskyPostUri;
+} catch {
+  // No sync state yet
+}
 
 const pubDate = new Date(entry.data.pubDate);
 const formattedDate = pubDate.toLocaleDateString("en-GB", {
@@ -53,4 +63,5 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
   <article>
     <Content />
   </article>
+  {bskyPostUri && <Comments bskyPostUri={bskyPostUri} />}
 </SiteLayout>

@@ -16,6 +16,8 @@ const blogPost = defineCollection({
       })
       .optional(),
     tags: z.array(z.string()).optional(),
+    atprotoUri: z.string().optional(),
+    bskyPostUri: z.string().optional(),
   }),
 });
 
