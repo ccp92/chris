@@ -19,14 +19,15 @@ if (!entry) return Astro.redirect("/404");
 
 const { Content } = await render(entry);
 
-let bskyPostUri: string | undefined;
+let documentUri: string | undefined;
 try {
   const syncState = JSON.parse(fs.readFileSync(".atproto-sync.json", "utf-8"));
-  bskyPostUri = syncState.posts[post]?.bskyPostUri;
+  documentUri = syncState.posts[post]?.documentUri;
 } catch {
   // No sync state yet
 }
 
+const bskyPostUri = entry.data.bskyPostUri;
 const pubDate = new Date(entry.data.pubDate);
 const formattedDate = pubDate.toLocaleDateString("en-GB", {
   year: "numeric",
@@ -57,7 +58,7 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
   }
 </style>
 
-<SiteLayout title={entry.data.title} description={entry.data.description}>
+<SiteLayout title={entry.data.title} description={entry.data.description} documentUri={documentUri}>
   <h1>{entry.data.title}</h1>
   <p class="date">{formattedDate}</p>
   <article>

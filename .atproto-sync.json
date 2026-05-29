@@ -3,15 +3,11 @@
     "2026/05/another-blog-on-the-internet": {
       "documentUri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/site.standard.document/3mmzf65p5dk2a",
       "documentRkey": "3mmzf65p5dk2a",
-      "bskyPostUri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/app.bsky.feed.post/3mmzf65rglc2a",
-      "bskyPostRkey": "3mmzf65rglc2a",
       "publishedAt": "2026-05-04T00:00:00.000Z"
     },
     "2026/05/jj-instead-of-git": {
       "documentUri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/site.standard.document/3mmzf65tpt22a",
       "documentRkey": "3mmzf65tpt22a",
-      "bskyPostUri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/app.bsky.feed.post/3mmzf65w6wc2a",
-      "bskyPostRkey": "3mmzf65w6wc2a",
       "publishedAt": "2026-05-28T00:00:00.000Z"
     }
   },

@@ -79,7 +79,6 @@ for (const filePath of files) {
 
   const slugId = id.split("/").map(slugify).join("/");
   const urlPath = `/blog/${slugId}`;
-  const postUrl = `https://chrisparsons.dev${urlPath}`;
 
   console.log(`Syncing: ${postData.title} (${id})`);
 
@@ -114,41 +113,13 @@ for (const filePath of files) {
     record: documentRecord,
   });
 
-  const encodedPostUrl = encodeURI(postUrl);
-  const bskyText = `${postData.title}\n\n${encodedPostUrl}`;
-  const bskyPostRecord = {
-    $type: "app.bsky.feed.post",
-    text: bskyText,
-    createdAt: new Date(postData.pubDate).toISOString(),
-    embed: {
-      $type: "app.bsky.embed.external",
-      external: {
-        uri: encodedPostUrl,
-        title: postData.title,
-        description: postData.description || "",
-      },
-    },
-  };
-
-  const bskyPostRkey = postState.bskyPostRkey || TID.nextStr();
-
-  await agent.com.atproto.repo.putRecord({
-    repo: did,
-    collection: "app.bsky.feed.post",
-    rkey: bskyPostRkey,
-    record: bskyPostRecord,
-  });
-
   syncState.posts[slugId] = {
     documentUri: `at://${did}/site.standard.document/${documentRkey}`,
     documentRkey,
-    bskyPostUri: `at://${did}/app.bsky.feed.post/${bskyPostRkey}`,
-    bskyPostRkey,
     publishedAt: postData.pubDate,
   };
 
   console.log(`  Document: ${syncState.posts[slugId].documentUri}`);
-  console.log(`  Bluesky:  ${syncState.posts[slugId].bskyPostUri}`);
 }
 
 fs.writeFileSync(syncStatePath, JSON.stringify(syncState, null, 2));

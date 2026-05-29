@@ -64,7 +64,7 @@ const { bskyPostUri } = Astro.props;
     const uri = container && container.getAttribute("data-uri");
     if (!uri) return;
 
-    function escapeHtml(text) {
+    function escapeHtml(text: string) {
       const div = document.createElement("div");
       div.textContent = text;
       return div.innerHTML;

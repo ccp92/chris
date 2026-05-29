@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   description?: string;
+  documentUri?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, documentUri } = Astro.props;
 
 import { Font } from "astro:assets";
 ---
@@ -60,6 +61,7 @@ import { Font } from "astro:assets";
     <meta property="og:url" content={Astro.url.href} />
     <title>Chris Parsons: {title}</title>
     <meta property="og:title" content={`Chris Parsons: ${title}`} />
+    {documentUri && <link rel="site.standard.document" href={documentUri} />}
     <script
       defer
       data-domain="chrisparsons.dev"
