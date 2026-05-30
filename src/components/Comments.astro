@@ -61,8 +61,8 @@ const { bskyPostUri } = Astro.props;
 <script>
   (function () {
     const container = document.querySelector(".comments-section");
-    const uri = container && container.getAttribute("data-uri");
-    if (!uri) return;
+    const rawUri = container && container.getAttribute("data-uri");
+    if (!rawUri) return;
 
     function escapeHtml(text: string) {
       const div = document.createElement("div");
@@ -70,81 +70,123 @@ const { bskyPostUri } = Astro.props;
       return div.innerHTML;
     }
 
-    fetch(
-      "https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=" +
-        encodeURIComponent(uri) +
-        "&depth=1",
-    )
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (data) {
-        const loadingEl = container.querySelector(".comments-loading");
-        if (loadingEl) loadingEl.remove();
+    function parseBskyUrl(url: string) {
+      const match = url.match(
+        /https:\/\/bsky\.app\/profile\/([^/]+)\/post\/([^/]+)/,
+      );
+      if (match) {
+        return { handle: decodeURIComponent(match[1]), rkey: match[2] };
+      }
+      return null;
+    }
 
-        const replies =
-          data.thread && data.thread.replies ? data.thread.replies : [];
-        if (replies.length === 0) {
-          const authorHandle =
-            data.thread && data.thread.post && data.thread.post.author
-              ? data.thread.post.author.handle
-              : "";
-          const rkey = uri.split("/").pop() || "";
-          container.innerHTML +=
-            '<p class="no-comments">No comments yet. <a href="https://bsky.app/profile/' +
-            encodeURIComponent(authorHandle) +
-            "/post/" +
-            encodeURIComponent(rkey) +
-            '" target="_blank" rel="noopener">Reply on Bluesky</a> to join the discussion.</p>';
-          return;
-        }
+    function resolveHandle(handle: string) {
+      return fetch(
+        "https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle?handle=" +
+          encodeURIComponent(handle),
+      )
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          return data.did;
+        });
+    }
 
-        const listEl = document.createElement("div");
-        listEl.className = "comments-list";
+    function getAtUri(uri: string) {
+      if (uri.startsWith("at://")) {
+        return Promise.resolve(uri);
+      }
+      const parsed = parseBskyUrl(uri);
+      if (!parsed) {
+        return Promise.resolve(uri);
+      }
+      return resolveHandle(parsed.handle).then(function (did) {
+        return "at://" + did + "/app.bsky.feed.post/" + parsed.rkey;
+      });
+    }
 
-        for (let i = 0; i < replies.length; i++) {
-          const reply = replies[i];
-          if (reply.$type !== "app.bsky.feed.defs#threadViewPost") continue;
-          const post = reply.post;
-          const author = post.author;
-          const text = post.record.text;
-          const time = new Date(post.indexedAt).toLocaleDateString("en-GB", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
+    getAtUri(rawUri)
+      .then(function (uri) {
+        return fetch(
+          "https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=" +
+            encodeURIComponent(uri) +
+            "&depth=1",
+        )
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (data) {
+            const loadingEl = container.querySelector(".comments-loading");
+            if (loadingEl) loadingEl.remove();
+
+            const replies =
+              data.thread && data.thread.replies ? data.thread.replies : [];
+            if (replies.length === 0) {
+              const authorHandle =
+                data.thread && data.thread.post && data.thread.post.author
+                  ? data.thread.post.author.handle
+                  : "";
+              const rkey = uri.split("/").pop() || "";
+              container.innerHTML +=
+                '<p class="no-comments">No comments yet. <a href="https://bsky.app/profile/' +
+                encodeURIComponent(authorHandle) +
+                "/post/" +
+                encodeURIComponent(rkey) +
+                '" target="_blank" rel="noopener">Reply on Bluesky</a> to join the discussion.</p>';
+              return;
+            }
+
+            const listEl = document.createElement("div");
+            listEl.className = "comments-list";
+
+            for (let i = 0; i < replies.length; i++) {
+              const reply = replies[i];
+              if (reply.$type !== "app.bsky.feed.defs#threadViewPost") continue;
+              const post = reply.post;
+              const author = post.author;
+              const text = post.record.text;
+              const time = new Date(post.indexedAt).toLocaleDateString(
+                "en-GB",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                },
+              );
+
+              const commentEl = document.createElement("div");
+              commentEl.className = "comment";
+              commentEl.innerHTML =
+                '<div class="comment-author">' +
+                escapeHtml(author.displayName || author.handle) +
+                "</div>" +
+                '<div class="comment-text">' +
+                escapeHtml(text) +
+                "</div>" +
+                '<div class="comment-time">' +
+                time +
+                "</div>";
+              listEl.appendChild(commentEl);
+            }
+
+            container.appendChild(listEl);
+
+            const authorHandle =
+              data.thread && data.thread.post && data.thread.post.author
+                ? data.thread.post.author.handle
+                : "";
+            const rkey = uri.split("/").pop() || "";
+            const replyLink = document.createElement("p");
+            replyLink.className = "reply-link";
+            replyLink.innerHTML =
+              '<a href="https://bsky.app/profile/' +
+              encodeURIComponent(authorHandle) +
+              "/post/" +
+              encodeURIComponent(rkey) +
+              '" target="_blank" rel="noopener">Reply on Bluesky →</a>';
+            container.appendChild(replyLink);
           });
-
-          const commentEl = document.createElement("div");
-          commentEl.className = "comment";
-          commentEl.innerHTML =
-            '<div class="comment-author">' +
-            escapeHtml(author.displayName || author.handle) +
-            "</div>" +
-            '<div class="comment-text">' +
-            escapeHtml(text) +
-            "</div>" +
-            '<div class="comment-time">' +
-            time +
-            "</div>";
-          listEl.appendChild(commentEl);
-        }
-
-        container.appendChild(listEl);
-
-        const authorHandle =
-          data.thread && data.thread.post && data.thread.post.author
-            ? data.thread.post.author.handle
-            : "";
-        const rkey = uri.split("/").pop() || "";
-        const replyLink = document.createElement("p");
-        replyLink.className = "reply-link";
-        replyLink.innerHTML =
-          '<a href="https://bsky.app/profile/' +
-          encodeURIComponent(authorHandle) +
-          "/post/" +
-          encodeURIComponent(rkey) +
-          '" target="_blank" rel="noopener">Reply on Bluesky →</a>';
-        container.appendChild(replyLink);
       })
       .catch(function (err) {
         console.error("Failed to load comments:", err);

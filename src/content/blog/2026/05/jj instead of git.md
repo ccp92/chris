@@ -7,6 +7,7 @@ author: 'Chris Parsons'
 #     url: 'https://docs.astro.build/assets/rose.webp'
 #     alt: 'The Astro logo on a dark background with a pink glow.'
 tags: ["jj", "jujutsu", "learning in public"]
+bskyPostUri: "https://bsky.app/profile/chrisparsons.dev/post/3mmx3anphy22d"
 ---
 
 ## What is jujutsu?
