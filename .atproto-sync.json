@@ -17,11 +17,11 @@
     "icon": {
       "$type": "blob",
       "ref": {
-        "$link": "bafkreibyx3e3lo7puwm4eqew5h3d4yzzi3kw3cxtsmd76rzbmiurx2kwfy"
+        "$link": "bafkreibuzy6w5ik5afahzjx5bpgeb6j4esqeg7tbbt2lve3rngpas23w2m"
       },
       "mimeType": "image/png",
-      "size": 908989
+      "size": 5527775
     },
-    "iconHash": "38bec9b5bbefa599c24096e9f63e633946d56d8af39307ff472162291be9562e"
+    "iconHash": "34ce3d6ea15d01407ca6fd0bcc40f93c24a0437e610cf4ba9371699e096b76d3"
   }
 }
