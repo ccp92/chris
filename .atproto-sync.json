@@ -13,6 +13,15 @@
   },
   "publication": {
     "uri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/site.standard.publication/3mmzf7uymf22f",
-    "rkey": "3mmzf7uymf22f"
+    "rkey": "3mmzf7uymf22f",
+    "icon": {
+      "$type": "blob",
+      "ref": {
+        "$link": "bafkreibyx3e3lo7puwm4eqew5h3d4yzzi3kw3cxtsmd76rzbmiurx2kwfy"
+      },
+      "mimeType": "image/png",
+      "size": 908989
+    },
+    "iconHash": "38bec9b5bbefa599c24096e9f63e633946d56d8af39307ff472162291be9562e"
   }
 }

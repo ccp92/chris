@@ -1,4 +1,5 @@
 import fs from "fs";
+import crypto from "crypto";
 import { createAgent, login } from "../src/lib/atproto.ts";
 import { TID } from "@atproto/common-web";
 
@@ -22,10 +23,24 @@ const agent = createAgent(pdsUrl);
 const session = await login(agent, handle, appPassword);
 const did = session.did;
 
-// 2. REUSE EXISTING RKEY OR MINT A NEW ONE
+// 2. UPLOAD ICON BLOB (only if changed)
+const iconPath = "src/images/icon.png";
+const iconBuffer = fs.readFileSync(iconPath);
+const iconHash = crypto.createHash("sha256").update(iconBuffer).digest("hex");
+
+let iconBlob = syncState.publication?.icon;
+if (!iconBlob || syncState.publication?.iconHash !== iconHash) {
+  console.log(`Uploading icon (${(iconBuffer.length / 1024).toFixed(1)}KB)...`);
+  const upload = await agent.uploadBlob(iconBuffer, { encoding: "image/png" });
+  iconBlob = upload.data.blob;
+} else {
+  console.log("Icon unchanged, reusing existing blob.");
+}
+
+// 3. REUSE EXISTING RKEY OR MINT A NEW ONE
 const rkey = syncState.publication?.rkey || TID.nextStr();
 
-// 3. USE PUTRECORD FOR IDEMPOTENT UPSERT
+// 4. USE PUTRECORD FOR IDEMPOTENT UPSERT
 const result = await agent.com.atproto.repo.putRecord({
   repo: did,
   collection: "site.standard.publication",
@@ -35,13 +50,16 @@ const result = await agent.com.atproto.repo.putRecord({
     name: "Chris Parsons",
     url: "https://chrisparsons.dev",
     description: "Blog of Chris Parsons",
+    icon: iconBlob,
   },
 });
 
-// 4. SAVE STATE BACK TO FILE
+// 5. SAVE STATE BACK TO FILE
 syncState.publication = {
   uri: result.data.uri,
   rkey: rkey,
+  icon: iconBlob,
+  iconHash: iconHash,
 };
 
 fs.writeFileSync(syncStatePath, JSON.stringify(syncState, null, 2));
