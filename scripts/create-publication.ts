@@ -11,15 +11,25 @@ if (!handle || !appPassword) {
   process.exit(1);
 }
 
+// 1. READ SYNC STATE FIRST
+const syncStatePath = ".atproto-sync.json";
+let syncState: any = { posts: {} };
+if (fs.existsSync(syncStatePath)) {
+  syncState = JSON.parse(fs.readFileSync(syncStatePath, "utf-8"));
+}
+
 const agent = createAgent(pdsUrl);
 const session = await login(agent, handle, appPassword);
 const did = session.did;
 
-const tid = TID.nextStr();
-const result = await agent.com.atproto.repo.createRecord({
+// 2. REUSE EXISTING RKEY OR MINT A NEW ONE
+const rkey = syncState.publication?.rkey || TID.nextStr();
+
+// 3. USE PUTRECORD FOR IDEMPOTENT UPSERT
+const result = await agent.com.atproto.repo.putRecord({
   repo: did,
   collection: "site.standard.publication",
-  rkey: tid,
+  rkey: rkey,
   record: {
     $type: "site.standard.publication",
     name: "Chris Parsons",
@@ -28,19 +38,14 @@ const result = await agent.com.atproto.repo.createRecord({
   },
 });
 
-const syncStatePath = ".atproto-sync.json";
-let syncState: any = { posts: {} };
-if (fs.existsSync(syncStatePath)) {
-  syncState = JSON.parse(fs.readFileSync(syncStatePath, "utf-8"));
-}
-
+// 4. SAVE STATE BACK TO FILE
 syncState.publication = {
   uri: result.data.uri,
-  rkey: tid,
+  rkey: rkey,
 };
 
 fs.writeFileSync(syncStatePath, JSON.stringify(syncState, null, 2));
 
-console.log("Publication created!");
+console.log("Publication processed successfully (upserted)!");
 console.log("AT-URI:", result.data.uri);
-console.log("Rkey:", tid);
+console.log("Rkey:", rkey);

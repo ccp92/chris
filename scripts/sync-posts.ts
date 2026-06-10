@@ -15,10 +15,6 @@ if (!handle || !appPassword) {
   process.exit(0);
 }
 
-const agent = createAgent(pdsUrl);
-const session = await login(agent, handle, appPassword);
-const did = session.did;
-
 const syncStatePath = ".atproto-sync.json";
 let syncState: any = { posts: {} };
 if (fs.existsSync(syncStatePath)) {
@@ -29,6 +25,10 @@ if (!syncState.publication) {
   console.error("No publication found. Run: bun run scripts/create-publication.ts");
   process.exit(1);
 }
+
+const agent = createAgent(pdsUrl);
+const session = await login(agent, handle, appPassword);
+const did = session.did;
 
 function getMarkdownFiles(dir: string): string[] {
   const files: string[] = [];
