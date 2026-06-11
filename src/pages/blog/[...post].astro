@@ -56,6 +56,11 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
   article :global(p) {
     font-size: 1.1rem;
   }
+
+  article :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
 </style>
 
 <SiteLayout title={entry.data.title} description={entry.data.description} documentUri={documentUri}>
