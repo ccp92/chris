@@ -7,6 +7,7 @@ author: 'Chris Parsons'
 #     url: 'https://docs.astro.build/assets/rose.webp'
 #     alt: 'The Astro logo on a dark background with a pink glow.'
 tags: ["LLM", "OpenSearch", "learning in public"]
+bskyPostUri: "https://bsky.app/profile/chrisparsons.dev/post/3mnzjhpepz22y"
 ---
 As part of my recent work, I've been using a lot of [OpenSearch's vector search](https://docs.opensearch.org/latest/vector-search/creating-vector-index/). As it's quite a new topic for me, I thought it would be worth writing up my thoughts and understanding of the tech. Hopefully you find it useful too!
 
