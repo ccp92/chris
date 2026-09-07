@@ -1,0 +1,72 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const title = "Now";
+const description = "What I'm up to right now in life!";
+
+import { Image } from "astro:assets";
+import leela from "../images/now/leela.jpg";
+---
+
+<style>
+  h1 {
+    color: hsl(153 39% 25%);
+  }
+
+  h2 {
+    margin-top: 0;
+    color: hsl(153 39% 25%);
+  }
+
+  .last-update {
+    font-size: 16px;
+    margin-top: 0;
+    color: hsl(153 39% 65%);
+    font-weight: normal;
+  }
+
+  img {
+    max-width: 240px;
+    height: auto;
+  }
+</style>
+
+<SiteLayout title={title} description={description}>
+  <h1>now</h1>
+  <p class="last-update">Last updated 23rd September 2026</p>
+
+  <h2>Life</h2>
+  <p>
+    I've been pretty focused on home decluttering recently, getting ready for my
+    partner to move in. Gotta make space for two people and a cat now!
+  </p>
+
+  <p>For the cat tax, a picture of Leela herself.</p>
+
+  <Image
+    src={leela}
+    alt="Leela, a fluffy black cat with yellow eyes and a small patch of white fur on her chest, sits upright on a light-colored floor looking forward."
+  />
+
+  <p>
+    I've also been focussing a lot more on healthier eating and exercise
+    recently, and I sure do miss putting cheese on everything 😭
+  </p>
+
+  <h2>Work</h2>
+
+  <p>
+    I've been working a lot on SEO optimisation recently. On the side I've been
+    experimenting a lot with{" "}
+    <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">
+      Jev
+    </a>{" "}
+    and getting some really exciting results out of the classifier.
+  </p>
+
+  <hr />
+
+  <p>
+    Page inspired by <a href="https://nownownow.com/about">nownownow.com</a>
+  </p>
+</SiteLayout>
