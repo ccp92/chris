@@ -1,7 +1,6 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { Image } from "astro:assets";
-import profile from "../images/profile.jpg";
 import headshot from "../images/headshot.jpeg";
 
 const title = "Home";
@@ -62,7 +61,7 @@ const experienceInYears = Math.floor(
     <header class="info">
       <Image
         src={headshot}
-        alt="A studio headshot of Chris Parsons, a person with short, styled brown hair and blue eyes, smiling gently at the camera. They are wearing a white, short-sleeved button-down shirt featuring a bold geometric pattern in shades of blue, pink, and lavender. The background is a clean, minimalist split of off-white on top and a soft, muted sage green on the bottom."
+        alt="A studio headshot of Chris Parsons, a person with short, styled brown hair and blue eyes, smiling gently at the camera. He is wearing a white, short-sleeved button-down shirt featuring a bold geometric pattern in shades of blue, pink, and lavender. The background is a clean, minimalist split of off-white on top and a soft, muted sage green on the bottom."
         class="profile-icon"
         loading="eager"
       />
@@ -75,12 +74,16 @@ const experienceInYears = Math.floor(
     <div class="intro-text">
       <p>
         Hey there! I'm Chris, a full-stack software engineer working in London
-        with {experienceInYears} years of experience. Currently working at <a
+        with {experienceInYears} years of experience. Currently working at{" "}
+        <a
           href="https://stotles.com"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="External link to Stotles' homepage">Stotles</a
-        >, helping to build a platform for companies to manage their public
+          aria-label="External link to Stotles' homepage"
+        >
+          Stotles
+        </a>
+        , helping to build a platform for companies to manage their public
         sector procurement flows.
       </p>
       <p>
