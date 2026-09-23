@@ -2,9 +2,11 @@
 import { defineConfig, fontProviders } from "astro/config";
 import preact from "@astrojs/preact";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [preact()],
+  integrations: [preact(), sitemap()],
   site: "https://chrisparsons.dev",
   fonts: [
     {
