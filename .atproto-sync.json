@@ -9,6 +9,11 @@
       "documentUri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/site.standard.document/3mmzf65tpt22a",
       "documentRkey": "3mmzf65tpt22a",
       "publishedAt": "2026-05-28T00:00:00.000Z"
+    },
+    "2026/06/opensearch-semantic-search": {
+      "documentUri": "at://did:plc:xtr5jsdtwekyj6zr3laoa7kj/site.standard.document/3mw7m2kykfc2o",
+      "documentRkey": "3mw7m2kykfc2o",
+      "publishedAt": "2026-06-11T00:00:00.000Z"
     }
   },
   "publication": {
