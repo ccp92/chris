@@ -13,6 +13,22 @@ import { Font } from "astro:assets";
 <style is:global>
   body {
     font-family: var(--font-open-sans);
+    background-color: #182f99;
+    /*Adds the blueprint hatch effect*/
+    background-image:
+      linear-gradient(rgba(220, 235, 255, 0.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(220, 235, 255, 0.25) 1px, transparent 1px),
+      linear-gradient(rgba(220, 235, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(220, 235, 255, 0.1) 1px, transparent 1px);
+    background-size:
+      100px 100px,
+      100px 100px,
+      20px 20px,
+      20px 20px;
+    background-position: -1px -1px;
+    background-attachment: fixed;
+    color: white;
+    margin: 0;
   }
 
   main {
@@ -20,17 +36,19 @@ import { Font } from "astro:assets";
     padding-top: 0;
     width: 100%;
     box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   a {
     text-decoration: underline;
-    color: hsl(153, 39%, 41%);
-    text-decoration-color: hsl(153, 39%, 41%);
-    font-weight: bold;
+    color: white;
+    text-decoration-color: white;
   }
 
-  .container {
-    max-width: 576px;
+  .page {
+    min-height: 100dvh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -45,6 +63,13 @@ import { Font } from "astro:assets";
     padding: 1rem;
     box-sizing: border-box;
     font-size: 1.5rem;
+
+    a {
+      text-decoration: underline;
+      text-decoration-style: wavy;
+      text-decoration-skip-ink: auto;
+      text-decoration-thickness: 1px;
+    }
   }
 </style>
 
@@ -74,10 +99,11 @@ import { Font } from "astro:assets";
       rel="webmention"
       href="https://webmention.io/chrisparsons.dev/webmention"
     />
+    <slot name="head" />
   </head>
 
   <body>
-    <div class="container">
+    <div class="page">
       <nav class="nav" aria-label="Primary">
         <a href="/">home</a>
         <a href="/work">work</a>

@@ -24,37 +24,44 @@ const title = "Blog";
 
 <style>
   h1 {
-    color: hsl(155, 43%, 18%);
+    color: white;
     margin-bottom: 0;
   }
 
   h2 {
-    color: hsl(153, 40%, 30%);
+    color: white;
   }
 
   .date {
-    color: hsl(0, 0%, 0%, 0.6);
+    color: white;
+  }
+
+  .blog-link {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 1px;
   }
 </style>
 
 <SiteLayout title={title}>
   <h1>Blog Posts</h1>
-  {
-    Array.from(groupedPosts.entries()).map(([month, monthPosts]) => (
-      <section>
-        <h2>{month}</h2>
-        <ul>
-          {monthPosts.map((post) => (
-            <li>
-              <span class="date">
-                {new Date(post.data.pubDate).toLocaleDateString("en-GB")}
-                {" - "}
-              </span>
-              <a href={`/blog/${post.id}`}>{post.data.title}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+  {Array.from(groupedPosts.entries()).map(([month, monthPosts]) => (
+    <section>
+      <h2>{month}</h2>
+      <ul>
+        {monthPosts.map((post) => (
+          <li>
+            <span class="date">
+              {new Date(post.data.pubDate).toLocaleDateString("en-GB")}
+              {" - "}
+            </span>
+            <a href={`/blog/${post.id}`} class="blog-link">
+              {post.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </SiteLayout>

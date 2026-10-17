@@ -24,5 +24,20 @@ export default defineConfig({
       },
       fallbacks: ["sans-serif"],
     },
+    {
+      provider: fontProviders.local(),
+      name: "Open Sans Display",
+      cssVariable: "--font-open-sans-display",
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/OpenSans-VariableFont_wdth,wght.ttf"],
+            weight: "300 800",
+            style: "normal",
+          },
+        ],
+      },
+      fallbacks: ["sans-serif"],
+    },
   ],
 });

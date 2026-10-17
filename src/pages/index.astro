@@ -1,77 +1,76 @@
 ---
+import { Font } from "astro:assets";
 import SiteLayout from "../layouts/SiteLayout.astro";
-import { Image } from "astro:assets";
-import headshot from "../images/headshot.jpeg";
 
 const title = "Home";
 const description =
   "Portfolio site of Chris Parsons (Christopher Parsons), a fullstack software engineer working in Lodnon, in the United Kingdom.";
-const startWork = new Date(2018, 7);
-const currentDate = new Date();
-const experienceInYears = Math.floor(
-  (currentDate.getTime() - startWork.getTime()) / (1000 * 60 * 60 * 24 * 365),
-);
+
+// TODO: Bring this back when adding below the fold content
+// const startWork = new Date(2018, 7);
+// const currentDate = new Date();
+// const experienceInYears = Math.floor(
+//   (currentDate.getTime() - startWork.getTime()) / (1000 * 60 * 60 * 24 * 365),
+// );
 ---
 
 <style>
-  p {
-    font-size: 16px;
-  }
-
   .container {
     display: flex;
     flex-direction: column;
     gap: 48px;
-    align-items: flex-start;
+    justify-content: flex-end;
+    flex: 1;
   }
 
   .info {
     display: flex;
     gap: 24px;
-    padding-top: 48px;
+    container-type: inline-size;
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column-reverse;
+    }
 
     h1 {
-      color: hsl(153 39% 25%);
-      font-size: 24px;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      margin-top: 0;
-      color: hsl(153 39% 65%);
-      font-weight: normal;
-    }
-
-    .profile-icon {
-      max-height: 120px;
-      max-width: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .description {
+      font-family: var(--font-open-sans-display);
+      color: white;
       display: flex;
       flex-direction: column;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 26.7cqi;
+      font-weight: normal;
+      line-height: 0.85;
+      overflow: clip;
+
+      @media (--md) {
+        display: block;
+        font-size: 15.68cqi;
+      }
     }
   }
 </style>
 
 <SiteLayout title={title} description={description}>
+  <Font slot="head" cssVariable="--font-open-sans-display" preload />
   <section class="container">
     <header class="info">
-      <Image
-        src={headshot}
-        alt="A studio headshot of Chris Parsons, a person with short, styled brown hair and blue eyes, smiling gently at the camera. He is wearing a white, short-sleeved button-down shirt featuring a bold geometric pattern in shades of blue, pink, and lavender. The background is a clean, minimalist split of off-white on top and a soft, muted sage green on the bottom."
-        class="profile-icon"
-        loading="eager"
-      />
-      <div class="description">
-        <h1>Chris Parsons</h1>
-        <p class="subtitle">Fullstack Software Engineer</p>
+      <div class="content">
+        <h1>
+          <span class="first-name">Chris</span>{" "}
+          <span class="surname">Parsons</span>
+        </h1>
+        <p>
+          Hey there! I'm a Fullstack Software Engineer based in London, working
+          to build Product focussed applications that solve real problems.
+        </p>
       </div>
     </header>
 
-    <div class="intro-text">
+    <!-- <div class="intro-text">
       <p>
         Hey there! I'm Chris, a full-stack software engineer working in London
         with {experienceInYears} years of experience. Currently working at{" "}
@@ -93,6 +92,6 @@ const experienceInYears = Math.floor(
       <p>
         Take a look at <a href="/work">what I've been up to</a>.
       </p>
-    </div>
+    </div> -->
   </section>
 </SiteLayout>

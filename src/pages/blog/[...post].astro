@@ -39,18 +39,18 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
 
 <style>
   h1 {
-    color: hsl(155, 43%, 18%);
+    color: white;
     margin-bottom: 0;
   }
 
   .date {
     margin-top: 0;
-    color: #74c69d;
+    color: white;
     font-size: 0.9rem;
   }
 
   article :global(h2) {
-    color: hsl(153, 40%, 30%);
+    color: white;
   }
 
   article :global(p) {
@@ -61,9 +61,19 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
     max-width: 100%;
     height: auto;
   }
+
+  article :global(a) {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 1px;
+  }
 </style>
 
-<SiteLayout title={entry.data.title} description={entry.data.description} documentUri={documentUri}>
+<SiteLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  documentUri={documentUri}
+>
   <h1>{entry.data.title}</h1>
   <p class="date">{formattedDate}</p>
   <article>
