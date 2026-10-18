@@ -27,8 +27,44 @@ const description =
     }
   }
 
+  /*Blueprint-style guide line down the left of the job list*/
+  .timeline {
+    position: relative;
+    border-left: 2px solid white;
+    padding-left: 1.5rem;
+
+    /*End caps at the top and bottom of the line*/
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: calc(-0.375rem - 1px);
+      width: 0.75rem;
+      border-top: 2px solid white;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+  }
+
   .job {
+    position: relative;
     padding-bottom: 24px;
+
+    /*Dash from the guide line out to the company name*/
+    &::before {
+      content: "";
+      position: absolute;
+      top: 1.1rem;
+      left: -1.5rem;
+      width: 1rem;
+      border-top: 2px solid white;
+    }
   }
 
   .job-title {
@@ -45,141 +81,143 @@ const description =
 
 <SiteLayout title={title} description={description}>
   <h1>Career</h1>
-  <section class="job">
-    <h2>
-      <a href="https://stotles.com" target="_blank">
-        Stotles
-      </a>
-    </h2>
-    <p class="job-title">Senior Software Engineer</p>
-    <p class="dates">May 2023 - Present</p>
-    <p>
-      For three years at Stotles, I've worked as a Full-Stack Software Engineer
-      on the Application team, building a combination of both user-facing
-      features and internal admin tools for our CS and Sales teams.
-    </p>
-    <p>
-      During my time at Stotles, I have worked on the development of an an AI
-      Q&A tool, enabling users to query complex government procurement data
-      using natural language. This system leverages Retrieval-Augmented
-      Generation (RAG) and Elasticsearch semantic search to provide contextual,
-      AI-driven answers.
-      <br />
-      I've also worked on implementing a hybrid search for our notice data;
-      combining keyword and semantic searching to surface relevant results for
-      users.
-    </p>
-    <p>
-      In addition to working on new features on the team, I've also been
-      involved in multiple application-wide refactorings: from deprecating old,
-      unsupported UI packages, to migrating from ruby on raisl to graphql.
-    </p>
-    <p>
-      Beyond coding, I also lead a cross-functional Design System working group
-      with designers and engineers to ensure alignment between Figma designs and
-      our codebase, improving maintainability and development velocity.
-    </p>
-    <p>
-      Key Technologies: TypeScript, NestJS, GraphQL, React, Ruby on Rails,
-      PostgreSQL, Elasticsearch, AWS, S3, Terraform.
-    </p>
-  </section>
-  <section class="job">
-    <h2>Babylon Health</h2>
-    <p class="job-title">Software Engineer</p>
-    <p class="dates">January 2022 - December 2022</p>
-    <p>
-      My position at Babylon Health as part of the web-platform team involved
-      building tools and procedures for product teams to deliver features
-      quickly to meet user needs.
-    </p>
-    <p>
-      This required getting involved in a wide variety of work; from creating
-      internal typescript packages, to designing guidelines, to building
-      development pipelines.
-    </p>
-    <p>
-      A large part of the work I did on building these packages was ensuring
-      that they were not only functional and met the needs of the various teams
-      within the organisation, but that they were also flexible and
-      maintainable. By building in this manner, as new requirements arose or
-      prior requirements changed, the cost for implementing these changes was
-      low.
-    </p>
-    <p>
-      In addition to this, I helped to design and write out guidelines for other
-      developers to work with, ensuring a common development flow across teams
-      when working with the platform.
-    </p>
-  </section>
-  <section class="job">
-    <h2>
-      <a href="https://madetech.com" target="_blank">
-        Made Tech
-      </a>
-    </h2>
-    <p class="job-title">Software Engineer</p>
-    <p class="dates">June 2018 - December 2021</p>
-    <p>
-      I initially joined Made Tech via their academy and in my time at the
-      company progressed to being a Software Engineer. My work at Made Tech as a
-      consultant for public sector clients gave me strong skills as a
-      generalist, helping me to jump into existing codebases and hit the ground
-      running.
-    </p>
-    <p>
-      The projects I worked on have varied from greenfield projects such as
-      improvements in the collation of contractual data from local councils, to
-      migrating legacy systems to cloud platforms, to working on large scale
-      internal CRM systems. This work was carried out in an agile way, and
-      pairing and mobbing were common aspects of my daily workflow.
-    </p>
-    <p>
-      Whilst being a consultant required me to pick up multiple tech stacks
-      based upon client needs, I am particularly strong with javascript,
-      typescript, react and express as a tech stack.
-    </p>
-    <p>
-      The consultancy side of my role also gave me strong skills in dealing with
-      end-users and stakeholders, allowing me to parse large amounts of
-      information and requirements into clear goals. I was then able to
-      communicate this effectively back to clients and deal with concerns and
-      queries in a professional manner.
-    </p>
-  </section>
-  <section class="job">
-    <h2>
-      <a href="https://www.mrisoftware.com/uk/" target="_blank">
-        Real Asset Management
+  <div class="timeline">
+    <section class="job">
+      <h2>
+        <a href="https://stotles.com" target="_blank">
+          Stotles
+        </a>
+      </h2>
+      <p class="job-title">Senior Software Engineer</p>
+      <p class="dates">May 2023 - Present</p>
+      <p>
+        For three years at Stotles, I've worked as a Full-Stack Software Engineer
+        on the Application team, building a combination of both user-facing
+        features and internal admin tools for our CS and Sales teams.
+      </p>
+      <p>
+        During my time at Stotles, I have worked on the development of an an AI
+        Q&A tool, enabling users to query complex government procurement data
+        using natural language. This system leverages Retrieval-Augmented
+        Generation (RAG) and Elasticsearch semantic search to provide contextual,
+        AI-driven answers.
         <br />
-        (currently mri software)
-      </a>
-    </h2>
-    <p class="job-title">Technical Services Consultant</p>
-    <p class="dates">November 2013 - March 2018</p>
-    <p>
-      My main role of supporting clients over the phone and email enabled me to
-      cultivate my ability to communicate effectively and with a professional
-      demeanour. In addition, the unscripted support required me to be able to
-      adapt quickly to varying queries and problems, whilst also being able to
-      both understand a query and deliver concise and clearly understandable
-      responses promptly. I also went on-site with clients and provided training
-      and other supplementary services.
-    </p>
-    <p>
-      In addition to my main support duties at the company, I also expanded my
-      responsibilities to other areas. An example of this was regularly being
-      involved in the QA process for the software and the accurate logging of
-      issues for developers to be able to review.
-    </p>
-    <p>
-      Within my first year at the company, I also gained a secondary role of
-      looking after documentation and help files for the software suite. The
-      process for this exposed me to both documentation writing and publishing.
-      I completed this through the use of Adobe RoboHelp to create both chm and
-      html files. I managed these additional responsibilities without impacting
-      my core role of support through appropriate time management and
-      prioritisation of tasks.
-    </p>
-  </section>
+        I've also worked on implementing a hybrid search for our notice data;
+        combining keyword and semantic searching to surface relevant results for
+        users.
+      </p>
+      <p>
+        In addition to working on new features on the team, I've also been
+        involved in multiple application-wide refactorings: from deprecating old,
+        unsupported UI packages, to migrating from ruby on raisl to graphql.
+      </p>
+      <p>
+        Beyond coding, I also lead a cross-functional Design System working group
+        with designers and engineers to ensure alignment between Figma designs and
+        our codebase, improving maintainability and development velocity.
+      </p>
+      <p>
+        Key Technologies: TypeScript, NestJS, GraphQL, React, Ruby on Rails,
+        PostgreSQL, Elasticsearch, AWS, S3, Terraform.
+      </p>
+    </section>
+    <section class="job">
+      <h2>Babylon Health</h2>
+      <p class="job-title">Software Engineer</p>
+      <p class="dates">January 2022 - December 2022</p>
+      <p>
+        My position at Babylon Health as part of the web-platform team involved
+        building tools and procedures for product teams to deliver features
+        quickly to meet user needs.
+      </p>
+      <p>
+        This required getting involved in a wide variety of work; from creating
+        internal typescript packages, to designing guidelines, to building
+        development pipelines.
+      </p>
+      <p>
+        A large part of the work I did on building these packages was ensuring
+        that they were not only functional and met the needs of the various teams
+        within the organisation, but that they were also flexible and
+        maintainable. By building in this manner, as new requirements arose or
+        prior requirements changed, the cost for implementing these changes was
+        low.
+      </p>
+      <p>
+        In addition to this, I helped to design and write out guidelines for other
+        developers to work with, ensuring a common development flow across teams
+        when working with the platform.
+      </p>
+    </section>
+    <section class="job">
+      <h2>
+        <a href="https://madetech.com" target="_blank">
+          Made Tech
+        </a>
+      </h2>
+      <p class="job-title">Software Engineer</p>
+      <p class="dates">June 2018 - December 2021</p>
+      <p>
+        I initially joined Made Tech via their academy and in my time at the
+        company progressed to being a Software Engineer. My work at Made Tech as a
+        consultant for public sector clients gave me strong skills as a
+        generalist, helping me to jump into existing codebases and hit the ground
+        running.
+      </p>
+      <p>
+        The projects I worked on have varied from greenfield projects such as
+        improvements in the collation of contractual data from local councils, to
+        migrating legacy systems to cloud platforms, to working on large scale
+        internal CRM systems. This work was carried out in an agile way, and
+        pairing and mobbing were common aspects of my daily workflow.
+      </p>
+      <p>
+        Whilst being a consultant required me to pick up multiple tech stacks
+        based upon client needs, I am particularly strong with javascript,
+        typescript, react and express as a tech stack.
+      </p>
+      <p>
+        The consultancy side of my role also gave me strong skills in dealing with
+        end-users and stakeholders, allowing me to parse large amounts of
+        information and requirements into clear goals. I was then able to
+        communicate this effectively back to clients and deal with concerns and
+        queries in a professional manner.
+      </p>
+    </section>
+    <section class="job">
+      <h2>
+        <a href="https://www.mrisoftware.com/uk/" target="_blank">
+          Real Asset Management
+          <br />
+          (currently mri software)
+        </a>
+      </h2>
+      <p class="job-title">Technical Services Consultant</p>
+      <p class="dates">November 2013 - March 2018</p>
+      <p>
+        My main role of supporting clients over the phone and email enabled me to
+        cultivate my ability to communicate effectively and with a professional
+        demeanour. In addition, the unscripted support required me to be able to
+        adapt quickly to varying queries and problems, whilst also being able to
+        both understand a query and deliver concise and clearly understandable
+        responses promptly. I also went on-site with clients and provided training
+        and other supplementary services.
+      </p>
+      <p>
+        In addition to my main support duties at the company, I also expanded my
+        responsibilities to other areas. An example of this was regularly being
+        involved in the QA process for the software and the accurate logging of
+        issues for developers to be able to review.
+      </p>
+      <p>
+        Within my first year at the company, I also gained a secondary role of
+        looking after documentation and help files for the software suite. The
+        process for this exposed me to both documentation writing and publishing.
+        I completed this through the use of Adobe RoboHelp to create both chm and
+        html files. I managed these additional responsibilities without impacting
+        my core role of support through appropriate time management and
+        prioritisation of tasks.
+      </p>
+    </section>
+  </div>
 </SiteLayout>
