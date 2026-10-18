@@ -3,9 +3,10 @@ interface Props {
   title: string;
   description?: string;
   documentUri?: string;
+  fullWidth?: boolean;
 }
 
-const { title, description, documentUri } = Astro.props;
+const { title, description, documentUri, fullWidth } = Astro.props;
 
 import { Font } from "astro:assets";
 ---
@@ -35,6 +36,8 @@ import { Font } from "astro:assets";
     padding: 1rem;
     padding-top: 0;
     width: 100%;
+    /*70ch text column plus the 1rem padding either side*/
+    max-width: calc(70ch + 2rem);
     box-sizing: border-box;
     flex: 1;
     display: flex;
@@ -55,9 +58,14 @@ import { Font } from "astro:assets";
     align-items: center;
   }
 
+  .page--full main {
+    max-width: none;
+  }
+
   .nav {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 12px;
     width: 100%;
     padding: 1rem;
@@ -103,7 +111,7 @@ import { Font } from "astro:assets";
   </head>
 
   <body>
-    <div class="page">
+    <div class:list={["page", { "page--full": fullWidth }]}>
       <nav class="nav" aria-label="Primary">
         <a href="/">home</a>
         <a href="/work">work</a>
