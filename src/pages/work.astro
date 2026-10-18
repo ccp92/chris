@@ -8,12 +8,19 @@ const description =
 
 <style>
   h1 {
-    color: hsl(153 39% 25%);
+    color: white;
   }
 
   h2 {
     margin-top: 0;
-    color: hsl(153 39% 25%);
+    color: white;
+
+    a {
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-decoration-style: wavy;
+      text-decoration-thickness: 1px;
+    }
   }
 
   .job {
@@ -28,7 +35,11 @@ const description =
 <SiteLayout title={title} description={description}>
   <h1>Career</h1>
   <section class="job">
-    <h2><a href="https://stotles.com" target="_blank">Stotles</a></h2>
+    <h2>
+      <a href="https://stotles.com" target="_blank">
+        Stotles
+      </a>
+    </h2>
     <p class="job-title">Senior Software Engineer</p>
     <p>May 2023 - Present</p>
     <p>
@@ -43,8 +54,9 @@ const description =
       Generation (RAG) and Elasticsearch semantic search to provide contextual,
       AI-driven answers.
       <br />
-      I've also worked on implementing a hybrid search for our notice data; combining
-      keyword and semantic searching to surface relevant results for users.
+      I've also worked on implementing a hybrid search for our notice data;
+      combining keyword and semantic searching to surface relevant results for
+      users.
     </p>
     <p>
       In addition to working on new features on the team, I've also been
@@ -90,7 +102,11 @@ const description =
     </p>
   </section>
   <section class="job">
-    <h2><a href="https://madetech.com" target="_blank">Made Tech</a></h2>
+    <h2>
+      <a href="https://madetech.com" target="_blank">
+        Made Tech
+      </a>
+    </h2>
     <p class="job-title">Software Engineer</p>
     <p>June 2018 - December 2021</p>
     <p>
@@ -122,11 +138,11 @@ const description =
   </section>
   <section class="job">
     <h2>
-      <a href="https://www.mrisoftware.com/uk/" target="_blank"
-        >Real Asset Management
+      <a href="https://www.mrisoftware.com/uk/" target="_blank">
+        Real Asset Management
         <br />
-        (currently mri software)</a
-      >
+        (currently mri software)
+      </a>
     </h2>
     <p class="job-title">Technical Services Consultant</p>
     <p>November 2013 - March 2018</p>
